@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: touchTransmission
+  title: Touch Transmission
+  author: Danny7007
+  description: "Something\u2019s wrong I can feel it...\n\nModule by Danny7007\nmoduleID:
+    touchTransmission\nManual can be found at ktane.timwi.de"
+  version: 1.0.0
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: 955dc82ba4f48534c893993c8a6c5b95, type: 3}
