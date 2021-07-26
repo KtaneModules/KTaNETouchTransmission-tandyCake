@@ -64,7 +64,6 @@ public class TouchTransmissionScript : MonoBehaviour {
         };
 
     }
-
     void Start ()
     {
         StartCoroutine(MeasureTimer());
@@ -82,11 +81,9 @@ public class TouchTransmissionScript : MonoBehaviour {
     }
     void ComputeShift()
     {
-        shift = Bomb.GetSerialNumberNumbers().Last();
-        if (shift == 0)
-            shift = 10;
+        shift = Bomb.GetSerialNumber().Any(x => "AEIOU".Contains(x)) ? -1 : 1;
         foreach (char letter in generatedWord)
-            answerWord += (char)((letter - 'A' + shift) % 26 + 'A');
+            answerWord += (char)((letter - 'A' + shift + 26) % 26 + 'A');
     }
     void GenerateAnswer()
     {

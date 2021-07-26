@@ -79,7 +79,7 @@ public static class BrailleData
     public static string BrailleToWord(List<bool[]> input)
     {
         if (input.Any(x => x.Length != 6))
-            throw new ArgumentOutOfRangeException("input.Length");
+            throw new ArgumentOutOfRangeException("Length of Braille character is not 6.");
         string output = string.Empty;
         foreach (bool[] letter in input)
         {
