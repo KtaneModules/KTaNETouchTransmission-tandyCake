@@ -42,7 +42,8 @@ public class TouchTransmissionScript : MonoBehaviour {
     private List<int> solution = new List<int>();
     private bool bumpOut;
 
-    void Awake () {
+    void Awake () 
+    {
         moduleId = moduleIdCounter++;
         foreach (KMSelectable button in inputButtons)
             button.OnInteract += delegate () 
@@ -282,5 +283,26 @@ public class TouchTransmissionScript : MonoBehaviour {
             inputButtons[num].OnInteract();
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    
+    //Gets the word list for the mod.
+    void FilterWordList()
+    {
+        HashSet<string> braillePatterns = new HashSet<string>();
+        List<string> words = new List<string>();
+        foreach (string word in WordList.words)
+        {
+            List<bool[]> braille = BrailleData.WordToBraille(word);
+            if (braillePatterns.Add(ArrangeOrder(braille, Order.Individual_Reading_Order).Join()) &&
+                braillePatterns.Add(ArrangeOrder(braille, Order.Merged_Reading_Order).Join()) &&
+                braillePatterns.Add(ArrangeOrder(braille, Order.Standard_Braille_Order).Join()))
+            {
+                words.Add(word);
+            }                
+
+        }
+        string path = "C:/Users/danie/OneDrive/Documents/GitHub/KTaNETouchTransmission/TouchTransmission/Assets/WordList.txt";
+        File.WriteAllLines(path, words.ToArray());
     }
 }

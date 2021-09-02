@@ -16,6 +16,6 @@ MonoBehaviour:
   author: Danny7007
   description: "Something\u2019s wrong I can feel it...\n\nModule by Danny7007\nmoduleID:
     touchTransmission\nManual can be found at ktane.timwi.de"
-  version: 1.0.0
+  version: 2.1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 955dc82ba4f48534c893993c8a6c5b95, type: 3}

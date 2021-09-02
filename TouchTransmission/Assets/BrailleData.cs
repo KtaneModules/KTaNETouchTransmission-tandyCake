@@ -74,6 +74,8 @@ public static class BrailleData
     }
     public static List<bool[]> WordToBraille(string input)
     {
+        if (input == null)
+            UnityEngine.Debug.Log("Kavin");
         return Split(input).Select(x => BrailleLetters[x]).ToList();
     }
     public static string BrailleToWord(List<bool[]> input)
