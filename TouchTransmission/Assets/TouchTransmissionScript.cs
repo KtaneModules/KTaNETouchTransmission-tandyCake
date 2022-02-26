@@ -125,7 +125,7 @@ public class TouchTransmissionScript : MonoBehaviour {
     }
     bool[] ArrangeOrder(List<bool[]> input, Order order)
     {
-        List<bool> output = new List<bool>();
+        List<bool> output = new List<bool>(6 * input.Count);
         switch (order)
         {
             case Order.Standard_Braille_Order:

@@ -45,7 +45,7 @@ public static class BrailleData
         { "EN", new bool[] { false, true, false, false, false, true } },
         { "ER", new bool[] { true, true, false, true, true, true } },
         { "FF", new bool[] { false, true, true, false, true, false } },
-        { "GG", new bool[] { false, false, false, false, false, false } },
+        { "GG", new bool[] { false, true, true, false, true, true } },
         { "GH", new bool[] { true, true, false, false, false, true } },
         { "IN", new bool[] { false, false, true, false, true, false } },
         { "ING", new bool[] { false, false, true, true, false, true } },
