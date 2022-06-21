@@ -164,7 +164,7 @@ public class TouchTransmissionScript : MonoBehaviour {
                 moduleSolved = true;
                 playing = false;
                 Module.HandlePass();
-                Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, transform);
+                Audio.PlaySoundAtTransform("solve", transform);
                 Debug.LogFormat("[Touch Transmission #{0}] Module solved!", moduleId);
                 if (bumpOut)
                     StartCoroutine(BumpMove());
