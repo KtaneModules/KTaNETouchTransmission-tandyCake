@@ -85,15 +85,18 @@ public static class BrailleData
         string output = string.Empty;
         foreach (bool[] letter in input)
         {
+            bool got = false;
             foreach (KeyValuePair<string, bool[]> entry in BrailleLetters)
             {
                 if (entry.Value.SequenceEqual(letter))
                 {
                     output += entry.Key;
+                    got = true;
                     break;
                 }
-                output += "?";   
             }
+            if (!got)
+                output += "?";   
         }
         return output;
     }

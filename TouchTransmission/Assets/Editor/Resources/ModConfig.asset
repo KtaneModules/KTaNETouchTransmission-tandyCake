@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: touchTransmission
   title: Touch Transmission
-  author: Danny7007
-  description: "Something\u2019s wrong I can feel it...\n\nModule by Danny7007\nmoduleID:
+  author: tandyCake
+  description: "Something\u2019s wrong I can feel it...\n\nModule by tandyCake\nmoduleID:
     touchTransmission\nManual can be found at ktane.timwi.de"
   version: 2.1.2
   outputFolder: build

@@ -72,6 +72,8 @@ public class TouchTransmissionScript : MonoBehaviour {
         ComputeShift();
         GenerateAnswer();
         DoLogging();
+        //Debug.Log(BrailleData.BrailleToWord(UndoArrangeOrder(generatedSequence, chosenOrder)));
+        //GeneratePuzzles();
     }
     void GetWord()
     {
@@ -304,5 +306,78 @@ public class TouchTransmissionScript : MonoBehaviour {
         }
         string path = "C:/Users/danie/OneDrive/Documents/GitHub/KTaNETouchTransmission/TouchTransmission/Assets/WordList.txt";
         File.WriteAllLines(path, words.ToArray());
+    }
+    void GeneratePuzzles()
+    {
+        List<string> words = new List<string>(2 * WordList.words.Length);
+        foreach (string word in WordList.words)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Order undo = (Order)i;
+                for (int j = 0; j < 3; j++)
+                {
+                    Order reapply = (Order)j;
+                    if (undo != reapply)
+                    {
+                        string transf = GetTransformation(word, undo, reapply);
+                        if (!transf.Contains('?'))
+                            words.Add(transf);
+                    }
+                }
+            }
+        }
+        string path = "C:/Users/danie/OneDrive/Documents/GitHub/KTaNETouchTransmission/TouchTransmission/Assets/WordList.txt";
+        File.WriteAllLines(path, words.ToArray());
+    }
+    string GetTransformation(string str, Order undoOrder, Order redoOrder)
+    {
+        bool[] orig = ArrangeOrder(BrailleData.WordToBraille(str), redoOrder);
+        List<bool[]> arrangement = UndoArrangeOrder(orig, undoOrder);
+
+        string output = BrailleData.BrailleToWord(arrangement);
+        return string.Format("{0} -> {1} ({2}, {3})", str, output, undoOrder.ToString().Replace('_', ' '), redoOrder.ToString().Replace('_', ' '));
+    }
+    List<bool[]> UndoArrangeOrder(bool[] input, Order order)
+    {
+        List<bool[]> output = new List<bool[]>(input.Length / 6);
+        bool[] add = new bool[6];
+        
+        switch (order)
+        {
+            case Order.Standard_Braille_Order:
+                for (int i = 0; i < input.Length; i++)
+                {
+                    add[i % 6] = input[i];
+                    if (i % 6 == 5)
+                        output.Add(add.ToArray());
+                }
+                break;
+            case Order.Individual_Reading_Order:
+                int[] undoReadingOrder = { 0, 2, 4, 1, 3, 5 };
+                for (int i = 0; i < input.Length; i++)
+                {
+                    add[i % 6] = input[undoReadingOrder[i % 6] + 6 * (i / 6)];
+                    if (i % 6 == 5)
+                        output.Add(add.ToArray());
+                }
+                break;
+            case Order.Merged_Reading_Order:
+                int[] readingOrder = { 0, 3, 1, 4, 2, 5 };
+                int glyphCount = input.Length / 6;
+                for (int i = 0; i < glyphCount; i++)
+                    output.Add(new bool[6]);
+                int pointer = 0;
+                for (int row = 0; row < 3; row++)
+                {
+                    for (int glyphIx = 0; glyphIx < glyphCount; glyphIx++)
+                    {
+                        output[glyphIx][readingOrder[2 * row]] = input[pointer++];
+                        output[glyphIx][readingOrder[2 * row + 1]] = input[pointer++];
+                    }
+                }
+                break;
+        }
+        return output;
     }
 }
